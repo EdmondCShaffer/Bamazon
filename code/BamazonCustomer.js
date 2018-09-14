@@ -17,6 +17,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err) {
   if (err) throw err;
+  console.log("connected");
   displayProducts();
 });
 
@@ -63,20 +64,22 @@ var start = function () {
     ]).then(function (answer) {
       // console.log(answer)
       // console.log("SELECT product FROM PRODUCTS WHERE ID=" + answer.id);
-      connection.query("SELECT * FROM products WHERE ID ?=" + answer.pickedId, function (err, res) {
+      connection.query('SELECT * FROM products WHERE id = ?',[answer.pickedId], function (err, res) {
+        if(err) throw err;
 
         console.log("~/~/~/ Processing /~/~/~")
         console.log(answer);
+        console.log(res);
         // console.log(
         //   "Product: " +
         //   res[0].product
         // );
-        for (var j = 0; j < res.length; j++) {
+        // for (var j = 0; j < res.length; j++) {
           if (answer.qty > res[0].quantity) {
             console.log("low on stock")
           };
 
-        }
+        // };
       })
 
 
