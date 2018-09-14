@@ -77,7 +77,11 @@ var start = function () {
         // for (var j = 0; j < res.length; j++) {
           if (answer.qty > res[0].quantity) {
             console.log("low on stock")
-          };
+          }else{
+            var totalDue;
+            totalDue = res[0].price * answer.qty;
+            console.log("Total amount due $ " + totalDue);
+          }
 
         // };
       })
