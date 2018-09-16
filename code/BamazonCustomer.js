@@ -43,6 +43,8 @@ function displayProducts() {
 }
 
 var start = function () {
+  console.log("~~~~ Welcome to Bamazon The Shopping Center Of The World ~~~~")
+
   inquirer
     .prompt([
       {
@@ -64,31 +66,58 @@ var start = function () {
     ]).then(function (answer) {
       // console.log(answer)
       // console.log("SELECT product FROM PRODUCTS WHERE ID=" + answer.id);
-      connection.query('SELECT * FROM products WHERE id = ?',[answer.pickedId], function (err, res) {
-        if(err) throw err;
+      connection.query('SELECT * FROM products WHERE id = ?', [answer.pickedId], function (err, res) {
+        if (err) throw err;
 
-        console.log("~/~/~/ Processing /~/~/~")
-        console.log(answer);
-        console.log(res);
+        console.log("~/~/~/ Processing Your Order/~/~/~")
+        // console.log(answer);
+        // console.log(res);
         // console.log(
         //   "Product: " +
         //   res[0].product
         // );
         // for (var j = 0; j < res.length; j++) {
-          if (answer.qty > res[0].quantity) {
-            console.log("low on stock")
-          }else{
-            var totalDue;
-            totalDue = res[0].price * answer.qty;
-            console.log("Total amount due $ " + totalDue);
-          }
+        if (answer.qty > res[0].quantity) {
+          console.log("low on stock");
+          start();
+        } else {
+          var totalDue;
+          totalDue = res[0].price * answer.qty;
+          console.log("Total amount due $ " + totalDue);
 
-        // };
-      })
+          connection.query("UPDATE products SET ? WHERE ?"[{
+            quantity: res[0].quantity - answer.qty
+          }, {
+              id: answer.pickedId
+            }], function (err, res) {
+
+            });
+
+          checkout();
+
+        };
+
+      });
 
 
-    })
+    });
 
+};
+
+function checkout() {
+  inquirer.prompt([{
+    type: 'confirm',
+    name: 'choice',
+    message: 'Would you like to continue shopping?'
+  }]).then(function (answer) {
+    if (answer.choice) {
+      start();
+    }
+    else {
+      console.log('Thank you for shopping at Bamazon!');
+      connection.end();
+    }
+  })
 };
 
 
