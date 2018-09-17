@@ -24,7 +24,7 @@ Install VAGRANT/Virtualbox
 
 Once in the cloned repository
 
-Run the command vagrant up upon complition run command vagrant ssh 
+Run the command vagrant up upon completion run command vagrant ssh 
 
 Navigate to the code directory by running cd /var/code/
 
