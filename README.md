@@ -1,6 +1,6 @@
 ~~~~~~~~  BAMAZON  ~~~~~~~~
 
-This app is an Amazon-like storefront. The app will take in orders from customers and deplete stock from the store's inventory. 
+This app is an Amazon-like storefront. The app will take in orders from customers and removes stock from the store's inventory. 
 
 ![text](./images/Bamazon.gif)
 
@@ -13,12 +13,12 @@ mySql Work bench
 Vagrant
 ubuntu 14.04 server
 
-How to use
-Clone repo onto your local machine & open CLI of your choosing
+How to use:
+1. Clone repo onto your local machine & open CLI of your choosing
 
-enter the cloned repos directory directory
+2. Enter the cloned repos directory directory
 
-Run in vagrant (Virtual Machine)
+3. Run in vagrant (Virtual Machine)
 
 Install VAGRANT/Virtualbox
 
